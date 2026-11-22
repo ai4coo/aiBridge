@@ -49,7 +49,7 @@ Download aiBridge from the [Releases page](https://github.com/ai4coo/aiBridge/re
 | File | For |
 |---|---|
 | `aiBridge-0.2.19-beta.dmg` | macOS (Apple Silicon, macOS 13 or later): open it and drag aiBridge into Applications (signed and notarized) |
-| `aibridge_0.2.19~beta_amd64.deb` | Debian and Ubuntu (x86_64): `sudo apt install ./aibridge_0.2.19~beta_amd64.deb` ([Linux setup](#linux-setup-from-start-to-finish)) |
+| `aibridge_0.2.19.beta_amd64.deb` | Debian and Ubuntu (x86_64): `sudo apt install ./aibridge_0.2.19.beta_amd64.deb` ([Linux setup](#linux-setup-from-start-to-finish)) |
 | `aibridge-0.2.19-beta-linux-x86_64.tar.gz` | Any Linux (x86_64): unpack it and run `install.sh` (no root needed) |
 | `SHA256SUMS` | The SHA-256 of each file: `sha256sum -c SHA256SUMS` (on a Mac, `shasum -a 256 -c SHA256SUMS`) |
 
@@ -218,7 +218,7 @@ else or when you cannot use `sudo`).
 **The `.deb`** (installs `/usr/bin/mcp-bridge`, the aiBridge menu entry and the icon):
 
 ```bash
-cd ~/Downloads; sudo apt install ./aibridge_0.2.19~beta_amd64.deb
+cd ~/Downloads; sudo apt install ./aibridge_0.2.19.beta_amd64.deb
 ```
 
 **The tarball** (no `sudo`; installs under `~/.local`):
