@@ -14,6 +14,12 @@ you or your computer to the author or to anyone else.**
   message content) to that session's local socket.
 - **The webhook you save, if you set up the mail relay.** Only then, and only to the address you saved, it sends a
   count-only doorbell over HTTPS: the number of waiting messages, never their content, names or ids.
+- **Your Gitea server, when an agent uses the Gitea tools.** Only when an approved agent calls one of the built-in
+  Gitea tools, the daemon calls the Gitea REST API at the address in `MCP_BRIDGE_GITEA_HOST`, with the Gitea tokens you
+  saved in your system keyring (service `gitea`). The request is the one the agent asked for.
+- **AI command-line tools you switch on.** Each tool in `cli-agents.json` is off until you turn it on. When one is on
+  and a message reaches it, the bridge updates that tool's repository clones from your Gitea server and runs the tool
+  on your computer with the request; what the tool sends to its own provider is set by that tool.
 
 Nothing else. The bridge makes no other network connections.
 
@@ -26,7 +32,13 @@ you (mode 0600):
   `MCP_BRIDGE_RETENTION_DAYS`);
 - logs (agent names and ids, message ids and sizes, times; never message bodies), rolled over and deleted after 7 days;
 - the approval state (`enrollment.json`), the HTTP access token, and, if you use the mail relay, its settings, the
-  webhook address and its authorization value, and a metadata-only event log.
+  webhook address and its authorization value, and a metadata-only event log;
+- the AI command-line tools list (`cli-agents.json`) and, for each tool you switch on, its repository clones and
+  request folders under `cli-agents/<name>`.
+
+Gitea tokens stay in your system keyring and in the daemon's memory, never in a file. Files that a Gitea tool
+downloads (job logs, Actions artifacts, non-image attachments) are saved under `~/.gitea-mcp/` or at the path the
+agent gives.
 
 The join seed is kept in the bridge's memory only, never on disk. When you press **Copy** for the seed, it is put on
 your clipboard and removed from it after 30 seconds. On a Mac, the app adds itself as a login item if you leave
